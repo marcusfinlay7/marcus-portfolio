@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marcus Finlay — Engineering Portfolio Mockup</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #111114;
+      --surface-2: #18181b;
+      --border: #2a2a30;
+      --text: #fafafa;
+      --muted: #a1a1aa;
+      --accent: #dc2626;
+      --accent-soft: rgba(220, 38, 38, .12);
+      --success: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 75% 0%, rgba(220,38,38,.09), transparent 28rem),
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 32px 32px, 32px 32px, auto;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    body.light {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-2: #f4f4f5;
+      --border: #e4e4e7;
+      --text: #18181b;
+      --muted: #71717a;
+      --accent-soft: rgba(220, 38, 38, .10);
+      --shadow: 0 18px 48px rgba(24,24,27,.08);
+      background:
+        radial-gradient(circle at 75% 0%, rgba(220,38,38,.08), transparent 28rem),
+        linear-gradient(rgba(24,24,27,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,24,27,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 32px 32px, 32px 32px, auto;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 30;
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+    }
+    nav { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 720; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--text); color: var(--bg); font-size: 13px; font-weight: 800;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);
+    }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .ghost-link, .icon-button {
+      border: 0; color: var(--muted); background: transparent; border-radius: 9px; cursor: pointer;
+      transition: .18s ease;
+    }
+    .ghost-link { padding: 8px 12px; font-size: 14px; }
+    .ghost-link:hover, .icon-button:hover { background: var(--surface-2); color: var(--text); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-button { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--border); background: var(--surface); }
+    .btn {
+      min-height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid transparent;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-weight: 650; font-size: 14px; cursor: pointer; transition: .18s ease;
+    }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-outline { border-color: var(--border); background: var(--surface); color: var(--text); }
+    .btn-outline:hover { background: var(--surface-2); }
+    .btn-ghost { color: var(--muted); }
+    .btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+    .hero { padding: 98px 0 72px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 68px; align-items: center; }
+    .eyebrow, .badge {
+      display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--muted); font-size: 12px; font-weight: 650;
+    }
+    .eyebrow { padding: 7px 11px; margin-bottom: 22px; }
+    .dot { width: 7px; height: 7px; border-radius: 99px; background: var(--success); box-shadow: 0 0 0 4px rgba(34,197,94,.10); }
+    h1 { margin: 0; font-size: clamp(48px, 7vw, 84px); line-height: .97; letter-spacing: -.065em; max-width: 780px; }
+    .hero-accent { color: var(--muted); }
+    .hero-copy { max-width: 650px; margin: 26px 0 0; color: var(--muted); font-size: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .micro-row { display: flex; flex-wrap: wrap; gap: 16px 24px; margin-top: 32px; color: var(--muted); font-size: 13px; }
+    .micro-row span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-visual { position: relative; min-height: 480px; }
+    .code-card {
+      position: absolute; inset: 0 20px 35px 0; border: 1px solid var(--border); border-radius: 24px;
+      background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 92%, white 8%), var(--surface));
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    .window-bar { height: 48px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: var(--muted); font-size: 12px; }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots i { width: 8px; height: 8px; border-radius: 50%; background: #52525b; }
+    .schematic { position: relative; height: calc(100% - 48px); overflow: hidden; }
+    .axis-x, .axis-y { position: absolute; background: rgba(161,161,170,.22); }
+    .axis-x { left: 28px; right: 28px; top: 72%; height: 1px; }
+    .axis-y { top: 24px; bottom: 28px; left: 20%; width: 1px; }
+    .robot {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(-3deg);
+      width: 170px; height: 250px;
+    }
+    .robot-body { position: absolute; left: 45px; top: 5px; width: 80px; height: 190px; border-radius: 18px; border: 2px solid var(--text); background: rgba(220,38,38,.07); }
+    .robot-board { position: absolute; left: 59px; top: 38px; width: 52px; height: 77px; border: 1px solid var(--accent); border-radius: 7px; }
+    .robot-board:before, .robot-board:after { content:""; position:absolute; left: 10px; right: 10px; height: 1px; background: var(--accent); opacity:.55; }
+    .robot-board:before { top: 23px; } .robot-board:after { top: 47px; }
+    .wheel { position: absolute; bottom: 0; width: 66px; height: 66px; border: 3px solid var(--text); border-radius: 50%; background: var(--surface); }
+    .wheel:after { content:""; position:absolute; inset: 18px; border: 2px dashed var(--muted); border-radius:50%; }
+    .wheel.left { left: 3px; } .wheel.right { right: 3px; }
+    .robot-line { position: absolute; left: 84px; top: -8px; height: 250px; width: 1px; background: var(--accent); transform: rotate(3deg); transform-origin: bottom; }
+    .robot-angle { position: absolute; right: 18px; top: 88px; color: var(--accent); font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .code-lines { position:absolute; left: 18px; bottom: 18px; font: 11px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); }
+    .code-lines b { color: var(--accent); font-weight: 500; }
+    .floating-stat {
+      position: absolute; right: 0; bottom: 0; width: 205px; padding: 18px; border: 1px solid var(--border); border-radius: 16px;
+      background: color-mix(in srgb, var(--surface) 93%, transparent); backdrop-filter: blur(16px); box-shadow: var(--shadow);
+    }
+    .floating-stat .label { color: var(--muted); font-size: 12px; }
+    .floating-stat .value { margin-top: 3px; font-size: 24px; font-weight: 750; letter-spacing: -.04em; }
+    .mini-bars { display: flex; align-items: end; gap: 4px; height: 34px; margin-top: 13px; }
+    .mini-bars i { flex: 1; border-radius: 3px 3px 1px 1px; background: var(--accent); opacity: .25; }
+    .mini-bars i:nth-child(1) { height: 30%; } .mini-bars i:nth-child(2) { height: 45%; } .mini-bars i:nth-child(3) { height: 38%; } .mini-bars i:nth-child(4) { height: 72%; } .mini-bars i:nth-child(5) { height: 62%; } .mini-bars i:nth-child(6) { height: 92%; opacity:.8; }
+    .section { padding: 74px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section-kicker { color: var(--accent); font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .14em; }
+    h2 { margin: 8px 0 0; font-size: clamp(34px, 5vw, 52px); letter-spacing: -.045em; line-height: 1.04; }
+    .section-copy { color: var(--muted); max-width: 470px; font-size: 15px; }
+    .tabs { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); }
+    .tab { padding: 7px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-weight: 650; font-size: 13px; cursor:pointer; }
+    .tab.active { background: var(--surface-2); color: var(--text); box-shadow: 0 1px 0 rgba(255,255,255,.05) inset; }
+    .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card {
+      border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden;
+      box-shadow: 0 1px 0 rgba(255,255,255,.03) inset; transition: transform .2s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+    .project-card { grid-column: span 6; min-height: 450px; display: flex; flex-direction: column; cursor: pointer; }
+    .project-card.featured { grid-column: span 7; }
+    .project-card.side { grid-column: span 5; }
+    .project-media { position: relative; height: 245px; border-bottom: 1px solid var(--border); background: var(--surface-2); overflow: hidden; }
+    .project-media.red { background: radial-gradient(circle at 70% 35%, rgba(220,38,38,.30), transparent 32%), #131316; }
+    .project-media.blueprint { background: linear-gradient(rgba(59,130,246,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,.10) 1px, transparent 1px), #0d1623; background-size: 26px 26px; }
+    .project-media.sensor { background: radial-gradient(circle at 50% 15%, rgba(34,197,94,.14), transparent 38%), #101513; }
+    .project-media.software { background: radial-gradient(circle at 85% 10%, rgba(168,85,247,.18), transparent 35%), #121016; }
+    .media-label { position:absolute; top: 14px; left: 14px; z-index:2; }
+    .badge { padding: 5px 9px; background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(8px); }
+    .badge-accent { color: #f87171; border-color: rgba(220,38,38,.35); background: rgba(220,38,38,.10); }
+    .project-content { padding: 24px; display:flex; flex-direction:column; flex:1; }
+    .project-title-row { display:flex; align-items:start; justify-content:space-between; gap:14px; }
+    .project-title { margin:0; font-size:24px; letter-spacing:-.035em; }
+    .project-desc { margin:9px 0 0; color:var(--muted); font-size:14px; max-width: 95%; }
+    .tech-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:18px; }
+    .tech { padding:4px 8px; border:1px solid var(--border); border-radius:6px; color:var(--muted); font:11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .project-footer { margin-top:auto; padding-top:22px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .metric { color:var(--muted); font-size:12px; }
+    .metric strong { display:block; color:var(--text); font-size:14px; }
+    .arrow-link { width:38px; height:38px; display:grid; place-items:center; border:1px solid var(--border); border-radius:9px; color:var(--muted); }
+    .arrow-link:hover { color:var(--text); background:var(--surface-2); }
+    .mini-robot { position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:250px; height:180px; }
+    .mini-robot .body { position:absolute; left:94px; top:4px; width:62px; height:126px; border:2px solid #f4f4f5; border-radius:16px; transform:rotate(-5deg); background:rgba(220,38,38,.10); }
+    .mini-robot .wheel { bottom:4px; width:70px; height:70px; }
+    .mini-robot .wheel.left { left:45px; } .mini-robot .wheel.right { right:45px; }
+    .mini-robot .ground { position:absolute; left:20px; right:20px; bottom:3px; height:1px; background:#71717a; }
+    .vessel { position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); width:270px; height:160px; }
+    .tank { position:absolute; left:28px; top:52px; width:210px; height:70px; border:2px solid #93c5fd; border-radius:40px; background:rgba(59,130,246,.06); }
+    .tank:before, .tank:after { content:""; position:absolute; width:10px; height:44px; bottom:-40px; border:2px solid #93c5fd; border-top:0; }
+    .tank:before { left:40px; transform:skew(-14deg); } .tank:after { right:40px; transform:skew(14deg); }
+    .nozzle { position:absolute; left:123px; top:18px; width:20px; height:38px; border:2px solid #93c5fd; border-bottom:0; }
+    .dimension { position:absolute; color:#60a5fa; font:10px ui-monospace, monospace; }
+    .dimension.d1 { left:10px; top:18px; } .dimension.d2 { right:2px; bottom:8px; }
+    .sensor-figure { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:260px; height:185px; }
+    .person { position:absolute; left:110px; top:8px; width:40px; height:140px; }
+    .head { width:28px; height:28px; border:2px solid #d4d4d8; border-radius:50%; margin:0 auto; }
+    .torso { width:2px; height:65px; background:#d4d4d8; margin:4px auto; }
+    .necklace { position:absolute; left:8px; top:39px; width:24px; height:18px; border-bottom:2px solid var(--accent); border-radius:0 0 50% 50%; }
+    .ray { position:absolute; left:86px; top:57px; width:100px; height:1px; background:linear-gradient(90deg,var(--accent),transparent); transform-origin:right; }
+    .ray.r1 { transform:rotate(20deg); } .ray.r2 { transform:rotate(-18deg); top:75px; }
+    .obstacle { position:absolute; right:20px; bottom:10px; width:52px; height:82px; border:2px solid #4ade80; border-radius:6px; background:rgba(34,197,94,.05); }
+    .terminal { position:absolute; inset:30px 28px; border:1px solid #3f3f46; border-radius:10px; background:#09090b; padding:18px; font:11px/1.8 ui-monospace, SFMono-Regular, monospace; color:#a1a1aa; }
+    .terminal .purple { color:#c084fc; } .terminal .green { color:#86efac; } .terminal .red-text { color:#f87171; }
+    .experience-grid { display:grid; grid-template-columns:.78fr 1.22fr; gap:36px; align-items:start; }
+    .about-card { padding:26px; }
+    .portrait {
+      aspect-ratio:1.15; border-radius:13px; border:1px solid var(--border); background:
+        radial-gradient(circle at 60% 20%, rgba(220,38,38,.18), transparent 38%),
+        linear-gradient(145deg,#1b1b20,#0e0e11);
+      display:grid; place-items:center; overflow:hidden;
+    }
+    .initials { font-size:96px; font-weight:800; letter-spacing:-.08em; color:#f4f4f5; opacity:.92; }
+    .about-copy { color:var(--muted); margin:18px 0 0; font-size:14px; }
+    .detail-list { display:grid; gap:10px; margin-top:20px; }
+    .detail { display:flex; align-items:center; justify-content:space-between; gap:14px; padding-top:10px; border-top:1px solid var(--border); font-size:13px; }
+    .detail span:first-child { color:var(--muted); }
+    .accordion { border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:var(--surface); }
+    .accordion-item + .accordion-item { border-top:1px solid var(--border); }
+    .accordion-trigger { width:100%; padding:22px; border:0; background:transparent; color:var(--text); display:grid; grid-template-columns:1fr auto; gap:20px; text-align:left; cursor:pointer; }
+    .accordion-trigger:hover { background:var(--surface-2); }
+    .role { font-size:16px; font-weight:700; }
+    .company { color:var(--muted); font-size:13px; margin-top:3px; }
+    .date { color:var(--muted); font:12px ui-monospace, monospace; }
+    .accordion-panel { display:none; padding:0 22px 22px; color:var(--muted); font-size:14px; }
+    .accordion-item.open .accordion-panel { display:block; }
+    .accordion-panel ul { margin:0; padding-left:18px; display:grid; gap:8px; }
+    .skill-card { margin-top:18px; padding:22px; }
+    .skills { display:flex; flex-wrap:wrap; gap:8px; }
+    .contact-card { padding:48px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:32px; background:linear-gradient(140deg,var(--surface),color-mix(in srgb,var(--surface) 86%, var(--accent) 14%)); }
+    .contact-card h2 { margin:0; max-width:700px; }
+    .contact-card p { color:var(--muted); max-width:620px; margin:14px 0 0; }
+    footer { padding:28px 0 48px; color:var(--muted); font-size:12px; }
+    .footer-row { display:flex; align-items:center; justify-content:space-between; gap:20px; border-top:1px solid var(--border); padding-top:24px; }
+    .hide { display:none !important; }
+    @media (max-width: 900px) {
+      .nav-links { display:none; }
+      .hero { grid-template-columns:1fr; padding-top:72px; }
+      .hero-visual { min-height:430px; }
+      .project-card, .project-card.featured, .project-card.side { grid-column:span 12; }
+      .experience-grid { grid-template-columns:1fr; }
+      .section-head { align-items:start; flex-direction:column; }
+      .contact-card { grid-template-columns:1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { width:min(100% - 24px,1160px); }
+      nav { height:60px; }
+      .brand span { display:none; }
+      .nav-actions .btn { display:none; }
+      .hero { padding:58px 0 48px; gap:42px; }
+      h1 { font-size:48px; }
+      .hero-copy { font-size:16px; }
+      .hero-visual { min-height:350px; }
+      .code-card { inset:0 0 25px 0; }
+      .floating-stat { width:170px; }
+      .section { padding:54px 0; }
+      .project-media { height:215px; }
+      .project-content { padding:20px; }
+      .contact-card { padding:28px; }
+      .footer-row { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav>
+        <a class="brand" href="#top"><span class="brand-mark">MF</span><span>Marcus Finlay</span></a>
+        <div class="nav-links">
+          <a class="ghost-link" href="#projects">Projects</a>
+          <a class="ghost-link" href="#experience">Experience</a>
+          <a class="ghost-link" href="#about">About</a>
+          <a class="ghost-link" href="#contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <button class="icon-button" id="themeToggle" aria-label="Toggle theme">☼</button>
+          <a class="btn btn-outline" href="#contact">Let’s talk ↗</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Open to engineering co-op opportunities</div>
+          <h1>Mechatronics engineer <span class="hero-accent">building systems that move.</span></h1>
+          <p class="hero-copy">I combine mechanical design, embedded software, electronics, and controls to turn ideas into working prototypes—from self-balancing robots to industrial pressure equipment.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View selected work ↓</a>
+            <a class="btn btn-outline" href="#">Download résumé ⭳</a>
+          </div>
+          <div class="micro-row">
+            <span>⌖ Hamilton, Ontario</span>
+            <span>⌁ McMaster University</span>
+            <span>◫ Mechatronics Engineering</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Self-balancing robot schematic">
+          <div class="code-card">
+            <div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span>angus_control_loop.cpp</span><span>● live</span></div>
+            <div class="schematic">
+              <div class="axis-x"></div><div class="axis-y"></div>
+              <div class="robot">
+                <div class="robot-line"></div><div class="robot-body"></div><div class="robot-board"></div>
+                <div class="wheel left"></div><div class="wheel right"></div><div class="robot-angle">θ = −3.2°</div>
+              </div>
+              <div class="code-lines"><div><b>roll</b> = imu.getEuler();</div><div>error = target − roll;</div><div>u = Kp·e + Ki·∫e + Kd·ė;</div><div><b>motor.write</b>(constrain(u));</div></div>
+            </div>
+          </div>
+          <div class="floating-stat">
+            <div class="label">Control loop</div><div class="value">100 Hz</div>
+            <div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">01 / Selected work</div><h2>Projects with proof,<br>not just descriptions.</h2></div>
+          <div>
+            <p class="section-copy">Each case study shows the problem, constraints, design decisions, implementation, testing, and what I would improve next.</p>
+            <div class="tabs" style="margin-top:16px">
+              <button class="tab active" data-filter="all">All</button>
+              <button class="tab" data-filter="robotics">Robotics</button>
+              <button class="tab" data-filter="mechanical">Mechanical</button>
+              <button class="tab" data-filter="software">Software</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-grid">
+          <article class="card project-card featured" data-category="robotics" data-href="projects/angus.html">
+            <div class="project-media red">
+              <span class="badge badge-accent media-label">Featured build</span>
+              <div class="mini-robot"><div class="ground"></div><div class="body"></div><div class="wheel left"></div><div class="wheel right"></div></div>
+            </div>
+            <div class="project-content">
+              <div class="project-title-row"><div><h3 class="project-title"><a href="projects/angus.html">Angus — Self-Balancing Robot</a></h3><p class="project-desc">Designed and built a two-wheel robot around an ESP32-C3, BNO085 IMU, motor encoders, and a custom PID control loop.</p></div><span class="badge">2025–26</span></div>
+              <div class="tech-row"><span class="tech">ESP32-C3</span><span class="tech">C++</span><span class="tech">PID</span><span class="tech">BNO085</span><span class="tech">CAD</span></div>
+              <div class="project-footer"><div class="metric"><strong>Full-stack hardware</strong>Mechanical + electrical + firmware</div><a class="arrow-link" href="projects/angus.html" aria-label="Open project case study">↗</a></div>
+            </div>
+          </article>
+
+          <article class="card project-card side" data-category="mechanical" data-href="projects/pressure-vessel.html">
+            <div class="project-media blueprint">
+              <span class="badge media-label">Industrial design</span>
+              <div class="vessel"><div class="tank"></div><div class="nozzle"></div><span class="dimension d1">600 lb flange</span><span class="dimension d2">SA-516 Gr.70</span></div>
+            </div>
+            <div class="project-content">
+              <div class="project-title-row"><div><h3 class="project-title"><a href="projects/pressure-vessel.html">Pressure Vessel Engineering</a></h3><p class="project-desc">Supported deaerator heater and storage tank design using Autodesk Inventor, AutoCAD, and Codeware COMPRESS.</p></div><span class="badge">Co-op</span></div>
+              <div class="tech-row"><span class="tech">Inventor</span><span class="tech">COMPRESS</span><span class="tech">ASME VIII</span></div>
+              <div class="project-footer"><div class="metric"><strong>Design-for-code</strong>Flanges, saddles, wear plates</div><a class="arrow-link" href="projects/pressure-vessel.html" aria-label="Open project case study">↗</a></div>
+            </div>
+          </article>
+
+          <article class="card project-card side" data-category="robotics" data-href="projects/wearable-obstacle-detector.html">
+            <div class="project-media sensor">
+              <span class="badge media-label">Human-centred design</span>
+              <div class="sensor-figure"><div class="person"><div class="head"></div><div class="torso"></div><div class="necklace"></div></div><div class="ray r1"></div><div class="ray r2"></div><div class="obstacle"></div></div>
+            </div>
+            <div class="project-content">
+              <div class="project-title-row"><div><h3 class="project-title"><a href="projects/wearable-obstacle-detector.html">Wearable Obstacle Detector</a></h3><p class="project-desc">A haptic necklace concept for a client with Usher syndrome, using angled distance sensors to identify upper-body obstacles.</p></div><span class="badge">Prototype</span></div>
+              <div class="tech-row"><span class="tech">HC-SR04</span><span class="tech">TF-Luna</span><span class="tech">Haptics</span></div>
+              <div class="project-footer"><div class="metric"><strong>50 cm threshold</strong>User-centred sensing strategy</div><a class="arrow-link" href="projects/wearable-obstacle-detector.html" aria-label="Open project case study">↗</a></div>
+            </div>
+          </article>
+
+          <article class="card project-card featured" data-category="software" data-href="projects/airport-baggage.html">
+            <div class="project-media software">
+              <span class="badge media-label">Engineering software</span>
+              <div class="terminal"><div><span class="purple">def</span> assign_baggage(passengers, fleet):</div><div>&nbsp;&nbsp;capacity = <span class="red-text">optimize</span>(fleet)</div><div>&nbsp;&nbsp;<span class="purple">for</span> passenger <span class="purple">in</span> passengers:</div><div>&nbsp;&nbsp;&nbsp;&nbsp;status = evaluate(passenger)</div><div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">report.append</span>(status)</div><br><div># boarded / oversold / bumped</div><div># overweight / delayed / layovers</div></div>
+            </div>
+            <div class="project-content">
+              <div class="project-title-row"><div><h3 class="project-title"><a href="projects/airport-baggage.html">Airport Baggage System</a></h3><p class="project-desc">Built a Python tool to process passenger and fleet data, determine assignment outcomes, and visualize the baggage mechanism.</p></div><span class="badge">Python</span></div>
+              <div class="tech-row"><span class="tech">Data parsing</span><span class="tech">Algorithms</span><span class="tech">Turtle graphics</span></div>
+              <div class="project-footer"><div class="metric"><strong>End-to-end project</strong>Software + physical mechanism</div><a class="arrow-link" href="projects/airport-baggage.html" aria-label="Open project case study">↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head"><div><div class="section-kicker">02 / Experience</div><h2>From calculations<br>to fabrication-ready work.</h2></div><p class="section-copy">Use this section to show where you worked, what you owned, and the engineering judgement behind your decisions.</p></div>
+        <div class="experience-grid">
+          <div class="card about-card" id="about">
+            <div class="portrait"><div class="initials">MF</div></div>
+            <p class="about-copy">Third-year Mechatronics Engineering student interested in robotics, controls, embedded systems, and mechanical design.</p>
+            <div class="detail-list"><div class="detail"><span>Education</span><strong>McMaster University</strong></div><div class="detail"><span>Location</span><strong>Hamilton, ON</strong></div><div class="detail"><span>Focus</span><strong>Robotics + Controls</strong></div></div>
+          </div>
+          <div>
+            <div class="accordion">
+              <div class="accordion-item open">
+                <button class="accordion-trigger"><div><div class="role">Mechanical Engineering Intern</div><div class="company">Superior Boilerworks & Welding Ltd.</div></div><div class="date">May–Aug 2025&nbsp;⌄</div></button>
+                <div class="accordion-panel"><ul><li>Updated pressure-vessel and tank designs in Autodesk Inventor and AutoCAD.</li><li>Reviewed nozzle, flange, saddle, wear-plate, MDMT, and radiography requirements in COMPRESS.</li><li>Worked through design changes with engineers and production constraints in mind.</li></ul></div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-trigger"><div><div class="role">Mechatronics Engineering</div><div class="company">McMaster University</div></div><div class="date">2023–Present&nbsp;⌄</div></button>
+                <div class="accordion-panel"><ul><li>Coursework across signals, controls, mechanics, electronics, statistics, and software.</li><li>Team design projects involving prototyping, testing, technical communication, and iteration.</li></ul></div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-trigger"><div><div class="role">Independent Robotics Projects</div><div class="company">Personal lab</div></div><div class="date">Ongoing&nbsp;⌄</div></button>
+                <div class="accordion-panel"><ul><li>Embedded C++, sensor integration, motor control, power distribution, and mechanical assembly.</li><li>Documented failures, tuning decisions, and next-step improvements instead of only final results.</li></ul></div>
+              </div>
+            </div>
+            <div class="card skill-card"><div class="section-kicker" style="margin-bottom:14px">Toolbox</div><div class="skills"><span class="badge">C++</span><span class="badge">Python</span><span class="badge">ESP32</span><span class="badge">PID control</span><span class="badge">Autodesk Inventor</span><span class="badge">AutoCAD</span><span class="badge">COMPRESS</span><span class="badge">MATLAB</span><span class="badge">Git</span><span class="badge">Electronics</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container"><div class="card contact-card"><div><div class="section-kicker">03 / Contact</div><h2>Have a project that needs both CAD and code?</h2><p>I’m interested in robotics, automation, controls, embedded systems, and mechanical product-development opportunities.</p></div><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="mailto:your.email@example.com">Email me ↗</a><a class="btn btn-outline" href="#">LinkedIn</a></div></div></div>
+    </section>
+  </main>
+
+  <footer><div class="container"><div class="footer-row"><span>© 2026 Marcus Finlay. Built with shadcn/ui design patterns.</span><span>GitHub · LinkedIn · Email</span></div></div></footer>
+
+  <script>
+    const themeButton = document.getElementById('themeToggle');
+    themeButton.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeButton.textContent = document.body.classList.contains('light') ? '◐' : '☼';
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        document.querySelectorAll('.project-card').forEach(card => {
+          card.classList.toggle('hide', filter !== 'all' && card.dataset.category !== filter);
+        });
+      });
+    });
+
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => trigger.parentElement.classList.toggle('open'));
+    });
+
+    document.querySelectorAll('.project-card[data-href]').forEach(card => {
+      card.addEventListener('click', event => {
+        if (event.target.closest('a, button')) return;
+        window.location.href = card.dataset.href;
+      });
+    });
+  </script>
+</body>
+</html>
