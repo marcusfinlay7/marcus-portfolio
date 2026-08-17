@@ -39,7 +39,7 @@ const RootLayout = ({ children }: LayoutProps<"/">) => {
             className={`dark ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">
-                <span aria-hidden="true" className="glow-blob" />
+                <span aria-hidden="true" className="background-gradient" />
                 {children}
             </body>
         </html>

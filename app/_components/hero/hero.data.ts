@@ -1,9 +1,13 @@
 import { site } from "@/lib/site"
 
 export const hero = {
-    greeting: "Hey, I'm Marcus",
+    greeting: "Hey, I'm Marcus Finlay",
     headline: "Mechatronics Engineer",
-    subhead: "I design and build robots, controls, and mechanical hardware.",
+    subhead: "I design and build robots, controls, and mechanical systems.",
+    headshot: {
+        src: "/images/marcus-finlay-headshot.jpg",
+        alt: "Marcus Finlay",
+    },
     ctaPrimary: { label: "View work", href: "#projects" },
     ctaSecondary: { label: "Resume", href: site.resumeUrl },
 }

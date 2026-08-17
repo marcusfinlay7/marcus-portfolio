@@ -1,3 +1,5 @@
+import { site } from "@/lib/site"
+
 export type SocialLink = {
     label: string
     icon: "mail" | "github" | "linkedin" | "resume"
@@ -28,7 +30,7 @@ export const socialLinks: SocialLink[] = [
     {
         label: "Resume",
         icon: "resume",
-        href: "/resume/marcus-finlay-resume.pdf",
+        href: site.resumeUrl,
         description: "Full work history and education.",
     },
 ]

@@ -8,6 +8,5 @@ export const site = {
     availableForWork: true,
     availabilityLabel: "Open to engineering co-op opportunities",
     headerCta: "Let's talk",
-    // TODO: drop the real PDF at public/resume/ and update this path.
-    resumeUrl: "/resume/marcus-finlay-resume.pdf",
+    resumeUrl: "/resume",
 }
