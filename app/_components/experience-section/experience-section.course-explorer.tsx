@@ -10,9 +10,11 @@ import {
     mcmasterCourseDescriptionUrl,
 } from "./experience-section.courses"
 
-const terms = courseLevels.flatMap((level) =>
-    level.terms.map((term) => ({ ...term, level: level.level })),
-)
+const terms = courseLevels
+    .flatMap((level) =>
+        level.terms.map((term) => ({ ...term, level: level.level })),
+    )
+    .reverse()
 
 const defaultTerm =
     terms.find((term) => term.label === "Fall 2026") ?? terms.at(-1)
@@ -54,8 +56,8 @@ export const CourseExplorer = () => {
 
     return (
         <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="grid md:grid-cols-[15.5rem_1fr]">
-                <aside className="border-b border-border px-3.5 py-5 md:border-r md:border-b-0">
+            <div className="grid md:h-[29rem] md:grid-cols-[15.5rem_1fr] lg:h-96">
+                <aside className="border-b border-border px-3.5 py-5 md:overflow-y-auto md:overscroll-contain md:border-r md:border-b-0 md:[scrollbar-color:var(--border)_transparent] md:[scrollbar-width:thin]">
                     <p className="px-2 pb-2 font-mono text-[10px] tracking-[0.16em] text-muted-foreground/70">
                         SEMESTERS
                     </p>
