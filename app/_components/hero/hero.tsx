@@ -67,13 +67,13 @@ export const Hero = () => {
                 </div>
             </div>
 
-            <div className="relative aspect-square w-full overflow-hidden rounded-3xl border bg-muted shadow-2xl animate-in fade-in slide-in-from-bottom-3 duration-700 delay-200 fill-mode-both">
+            <div className="relative aspect-square w-[min(100%,28rem,70svh)] justify-self-center overflow-hidden rounded-3xl border bg-muted shadow-2xl animate-in fade-in slide-in-from-bottom-3 duration-700 delay-200 fill-mode-both lg:w-full lg:justify-self-stretch">
                 <Image
                     src={hero.headshot.src}
                     alt={hero.headshot.alt}
                     fill
                     className="object-cover object-center"
-                    sizes="(max-width: 1024px) calc(100vw - 2.5rem), 40vw"
+                    sizes="(max-width: 1023px) min(calc(100vw - 2.5rem), 28rem), 40vw"
                     preload
                 />
             </div>

@@ -102,6 +102,8 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --grid-line: rgba(0, 0, 0, 0.035);
+    --timeline-glow: rgba(220, 38, 38, 0.18);
 
     /* Typography tokens - one group per text "type" used across the page.
        Edit a type's font/size/weight/color here and every place that uses it updates together. */
@@ -138,7 +140,7 @@
     --tx-nav-color: var(--foreground);
 }
 
-.dark {
+.dark.theme-portfolio {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
@@ -170,6 +172,44 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+    --grid-line: rgba(255, 255, 255, 0.045);
+    --timeline-glow: rgba(220, 38, 38, 0.18);
+}
+
+.dark.theme-coursework {
+    --background: #08080a;
+    --foreground: #e8e8ec;
+    --card: #0c0c0e;
+    --card-foreground: #e8e8ec;
+    --popover: #101013;
+    --popover-foreground: #e8e8ec;
+    --primary: #ff3040;
+    --primary-foreground: #08080a;
+    --secondary: #17171b;
+    --secondary-foreground: #e8e8ec;
+    --muted: #17171b;
+    --muted-foreground: #8b8b93;
+    --accent: #1c1c20;
+    --accent-foreground: #e8e8ec;
+    --destructive: #ff3040;
+    --border: #1e1e22;
+    --input: #23232a;
+    --ring: #ff3040;
+    --chart-1: #ff3040;
+    --chart-2: #c9c9d1;
+    --chart-3: #8b8b93;
+    --chart-4: #5a5a62;
+    --chart-5: #2f2f36;
+    --sidebar: #0c0c0e;
+    --sidebar-foreground: #e8e8ec;
+    --sidebar-primary: #ff3040;
+    --sidebar-primary-foreground: #08080a;
+    --sidebar-accent: #17171b;
+    --sidebar-accent-foreground: #e8e8ec;
+    --sidebar-border: #1e1e22;
+    --sidebar-ring: #ff3040;
+    --grid-line: rgba(255, 255, 255, 0.03);
+    --timeline-glow: rgba(255, 48, 64, 0.22);
 }
 
 @utility text-hero {
@@ -233,12 +273,8 @@
     body {
         color: var(--foreground);
         background:
-            linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-            linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.025) 1px,
-                transparent 1px
-            ),
+            linear-gradient(var(--grid-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
             var(--background);
         background-size:
             32px 32px,

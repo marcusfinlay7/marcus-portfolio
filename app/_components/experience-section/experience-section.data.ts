@@ -40,7 +40,7 @@ export const work: WorkEntry[] = [
     {
         title: "Warehouse Assistant",
         organization: "Stoney Creek Furniture",
-        location: "Hamilton, ON",
+        location: "Stoney Creek, ON",
         date: "Jun 2022–Aug 2024",
         logo: "/work-logos/stoney-creek-furniture.png",
         points: [

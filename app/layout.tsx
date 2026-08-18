@@ -32,11 +32,15 @@ export const metadata: Metadata = {
     description: hero.subhead,
 }
 
+type SiteTheme = "portfolio" | "coursework"
+
+const ACTIVE_THEME: SiteTheme = "coursework"
+
 const RootLayout = ({ children }: LayoutProps<"/">) => {
     return (
         <html
             lang="en"
-            className={`dark ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
+            className={`dark theme-${ACTIVE_THEME} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">
                 <span aria-hidden="true" className="background-gradient" />
