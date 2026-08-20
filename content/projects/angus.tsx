@@ -11,14 +11,14 @@ export const angus: ProjectContent = {
     category: "robotics",
     description:
         "A two-wheel balancing robot built to learn embedded control from the sensor all the way to the motors.",
-    tags: ["ESP32-C3", "C++", "PID", "BNO085", "CAD"],
+    tags: ["C++", "PID", "CAD", "ESP32"],
     metric: "Mechanical + electrical + firmware",
     span: "md:col-span-7",
     eyebrow: "Robotics",
     caseStudyTags: [
         "Featured build",
+        "C++",
         "ESP32-C3",
-        "BNO085",
         "PID control",
         "Encoders",
     ],
@@ -40,21 +40,19 @@ export const angus: ProjectContent = {
         <>
             <h2 id="overview">Overview</h2>
             <p>
-                Angus started as a way to learn the whole robotics stack at
-                once: mechanical design, power electronics, sensors, embedded
-                C++, motor control, and feedback control.
+                The self-balancing robot later named Angus by my grandmother
+                started as a way to learn the whole robotics stack at once. The
+                mechanical design, electronics, sensors, embedded C++, and motor
+                control. It eventually developed into the project that inspired
+                me to learn more about control systems.
             </p>
             <p>
-                Keeping a two-wheel robot upright forces every subsystem to work
-                together. The sensor estimate has to be trustworthy, the motors
-                have to respond quickly, the chassis has to behave predictably,
-                and the controller has to react before the robot falls outside
-                its recoverable range.
+                Angus uses sensors to measure its tilt and continuously adjusts
+                its wheel motors to keep itself upright. For this to work, every
+                subsystem must operate together. The sensor data must be
+                reliable, the motors must respond quickly, and the controller
+                must correct the robot before it tips too far to recover.
             </p>
-            <Callout label="Story to emphasize">
-                Show how the robot changed when early versions did not behave
-                the way you expected. The iteration is the engineering story.
-            </Callout>
 
             <h2 id="system-architecture">System architecture</h2>
             <p>

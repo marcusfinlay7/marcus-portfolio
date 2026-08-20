@@ -71,8 +71,9 @@ export const Hero = () => {
                 <Image
                     src={hero.headshot.src}
                     alt={hero.headshot.alt}
-                    fill
-                    className="object-cover object-center"
+                    width={1815}
+                    height={1361}
+                    className="h-full w-full object-cover object-[45%_top]"
                     sizes="(max-width: 1023px) min(calc(100vw - 2.5rem), 28rem), 40vw"
                     preload
                 />

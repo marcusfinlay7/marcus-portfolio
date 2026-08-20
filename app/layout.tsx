@@ -43,7 +43,12 @@ const RootLayout = ({ children }: LayoutProps<"/">) => {
             className={`dark theme-${ACTIVE_THEME} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">
-                <span aria-hidden="true" className="background-gradient" />
+                <span aria-hidden="true" className="background-gradient">
+                    <span className="background-gradient-segment background-gradient-segment-top-right" />
+                    <span className="background-gradient-segment background-gradient-segment-bottom-right" />
+                    <span className="background-gradient-segment background-gradient-segment-top-left" />
+                    <span className="background-gradient-segment background-gradient-segment-bottom-left" />
+                </span>
                 {children}
             </body>
         </html>

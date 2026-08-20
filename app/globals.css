@@ -271,6 +271,8 @@
         @apply border-border outline-ring/50;
     }
     body {
+        position: relative;
+        isolation: isolate;
         color: var(--foreground);
         background:
             linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -287,17 +289,81 @@
 }
 
 .background-gradient {
-    position: fixed;
+    --shape-height: min(100vh, 56rem);
+
+    position: absolute;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(
+    pointer-events: none;
+}
+
+.background-gradient-segment {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat-y;
+    background-size: 100% var(--shape-height);
+}
+
+.background-gradient-segment-top-right {
+    background-image: radial-gradient(
         ellipse 175% 160% at -20% -25%,
         transparent 72%,
         color-mix(in oklch, var(--primary) 6%, transparent) 82%,
         color-mix(in oklch, var(--primary) 16%, transparent) 92%,
         color-mix(in oklch, var(--primary) 28%, transparent) 100%
     );
-    pointer-events: none;
+    mask-image: repeating-linear-gradient(
+        to bottom,
+        black 0 var(--shape-height),
+        transparent var(--shape-height) calc(var(--shape-height) * 4)
+    );
+}
+
+.background-gradient-segment-bottom-right {
+    background-image: radial-gradient(
+        ellipse 175% 160% at -20% 125%,
+        transparent 72%,
+        color-mix(in oklch, var(--primary) 6%, transparent) 82%,
+        color-mix(in oklch, var(--primary) 16%, transparent) 92%,
+        color-mix(in oklch, var(--primary) 28%, transparent) 100%
+    );
+    mask-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 var(--shape-height),
+        black var(--shape-height) calc(var(--shape-height) * 2),
+        transparent calc(var(--shape-height) * 2) calc(var(--shape-height) * 4)
+    );
+}
+
+.background-gradient-segment-top-left {
+    background-image: radial-gradient(
+        ellipse 175% 160% at 120% -25%,
+        transparent 72%,
+        color-mix(in oklch, var(--primary) 6%, transparent) 82%,
+        color-mix(in oklch, var(--primary) 16%, transparent) 92%,
+        color-mix(in oklch, var(--primary) 28%, transparent) 100%
+    );
+    mask-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--shape-height) * 2),
+        black calc(var(--shape-height) * 2) calc(var(--shape-height) * 3),
+        transparent calc(var(--shape-height) * 3) calc(var(--shape-height) * 4)
+    );
+}
+
+.background-gradient-segment-bottom-left {
+    background-image: radial-gradient(
+        ellipse 175% 160% at 120% 125%,
+        transparent 72%,
+        color-mix(in oklch, var(--primary) 6%, transparent) 82%,
+        color-mix(in oklch, var(--primary) 16%, transparent) 92%,
+        color-mix(in oklch, var(--primary) 28%, transparent) 100%
+    );
+    mask-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--shape-height) * 3),
+        black calc(var(--shape-height) * 3) calc(var(--shape-height) * 4)
+    );
 }
 
 @theme {

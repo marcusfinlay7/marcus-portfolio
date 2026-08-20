@@ -1,4 +1,5 @@
 export const projectsSection = {
     title: "Projects",
-    description: "Selected builds with the engineering behind them.",
+    description:
+        "Featured mechatronics builds and engineering projects across robotics, mechanical design, and software.",
 }

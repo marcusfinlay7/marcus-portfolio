@@ -61,7 +61,7 @@ export const ProjectCaseStudy = ({
                     <span className="text-foreground">{title}</span>
                 </nav>
 
-                <section className="grid animate-in gap-10 py-16 fade-in slide-in-from-bottom-2 duration-700 lg:grid-cols-[1fr_320px] lg:items-end">
+                <section className="grid animate-in gap-10 py-16 fade-in slide-in-from-bottom-2 duration-700 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
                     <div>
                         <SectionHeading
                             className="mb-0 max-w-4xl"

@@ -20,7 +20,7 @@ export type EducationEntry = {
 
 export const experienceSection = {
     title: "Experience",
-    description: "Internships, coursework, and hands-on projects.",
+    description: "Internships, education, and coursework.",
 }
 
 export const work: WorkEntry[] = [

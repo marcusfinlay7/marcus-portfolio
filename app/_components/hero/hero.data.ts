@@ -5,9 +5,10 @@ export const hero = {
     headline: "Mechatronics Engineer",
     subhead: "I design and build robots, controls, and mechanical systems.",
     headshot: {
-        src: "/images/marcus-finlay-headshot.jpg",
+        src: "/images/Headshot.jpg",
         alt: "Marcus Finlay",
     },
     ctaPrimary: { label: "View work", href: "#projects" },
     ctaSecondary: { label: "Resume", href: site.resumeUrl },
 }
+ 
